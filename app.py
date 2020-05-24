@@ -6,10 +6,8 @@ from sqlalchemy.engine.url import make_url
 from db import db, ClientURI, setup_module
 
 from security import authenticate, identity
-from resources.user import UserRegister
-from resources.item import Item, ItemList
-from resources.agama import Agama
-from resources.store import Store, StoreList
+from controllers.user import UserRegister
+from controllers.agama import Agama
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = ClientURI
@@ -28,10 +26,6 @@ def create_tables():
 
 jwt = JWT(app, authenticate, identity)  # /auth
 
-api.add_resource(Store, '/store/<string:name>')
-api.add_resource(StoreList, '/stores')
-api.add_resource(Item, '/item/<string:name>')
-api.add_resource(ItemList, '/items')
 api.add_resource(Agama, '/agama')
 api.add_resource(UserRegister, '/register')
 
